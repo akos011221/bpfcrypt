@@ -1,0 +1,9 @@
+bpf/vmlinux.h
+
+/bpfcrypt
+cmd/agent/agent
+
+.idea/
+.vscode/
+*.swp
+*.swo
