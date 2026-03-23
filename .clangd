@@ -1,0 +1,8 @@
+CompileFlags:
+  Add:
+    - "-x"
+    - "c"
+    - "-target"
+    - "bpf"
+    - "-D__TARGET_ARCH_x86"
+    - "-I/usr/include/bpf"
