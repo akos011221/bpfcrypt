@@ -2,8 +2,9 @@
 
 #include "common.h"
 #include "vmlinux.h"
-#include <bpf/bpf_helpers.h>
 #include <bpf/bpf_core_read.h>
+#include <bpf/bpf_helpers.h>
+#include <bpf/bpf_tracing.h>
 
 static __always_inline int emit_crypto_event(const char *algo_ptr, __u32 etype) {
     if (!should_trace())
@@ -47,5 +48,8 @@ int kprobe_crypto_alloc_skcipher(struct pt_regs *ctx) {
     const char *alg_name = (const char *)PT_REGS_PARM1(ctx);
     return emit_crypto_event(alg_name, EVENT_KERNEL_CRYPTO_API);
 }
+
+/* Force BTF emission */
+struct crypto_event *unused_event __attribute__((unused));
 
 char _license[] SEC("license") = "GPL";
